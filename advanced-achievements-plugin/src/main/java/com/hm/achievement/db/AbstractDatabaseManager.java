@@ -31,6 +31,9 @@ import com.hm.achievement.db.data.AwardedDBAchievement;
 import com.hm.achievement.exception.PluginLoadError;
 import com.hm.achievement.lifecycle.Reloadable;
 import com.hm.mcshared.file.CommentedYamlConfiguration;
+import org.jooq.DSLContext;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DSL;
 
 /**
  * Abstract class in charge of factoring out common functionality for the database manager.
@@ -151,6 +154,10 @@ public abstract class AbstractDatabaseManager implements Reloadable {
 	 */
 	public List<String> getPlayerAchievementNamesList(UUID uuid) {
 		String sql = "SELECT achievement FROM " + prefix + "achievements WHERE playername = ?";
+		final DSLContext dslContext = DSL.using(dataSource, SQLDialect.MYSQL);
+		return dslContext.fetch(sql)
+			.map(rs -> StringUtils.replace(rs.getValue("achievement", String.class), "''", "'"));
+/*
 		return ((SQLReadOperation<List<String>>) () -> {
 			List<String> achievementNamesList = new ArrayList<>();
 			try (final Connection conn = dataSource.getConnection();
@@ -166,6 +173,7 @@ public abstract class AbstractDatabaseManager implements Reloadable {
 			}
 			return achievementNamesList;
 		}).executeOperation("retrieving the names of received achievements");
+ */
 	}
 
 	/**
