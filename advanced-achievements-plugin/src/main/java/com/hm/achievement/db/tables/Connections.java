@@ -5,10 +5,12 @@ package com.hm.achievement.db.tables;
 
 import com.hm.achievement.db.DefaultSchema;
 import com.hm.achievement.db.Keys;
+import com.hm.achievement.db.StringToUUIDConverter;
 import com.hm.achievement.db.tables.records.ConnectionsRecord;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
@@ -49,6 +51,12 @@ public class Connections extends TableImpl<ConnectionsRecord> {
 	 */
 	public final TableField<ConnectionsRecord, String> PLAYERNAME = createField(DSL.name("playername"),
 			org.jooq.impl.SQLDataType.CHAR(36), this, "");
+
+	/**
+	 * The convenience column <code>achievements.playername</code>.
+	 */
+	public final TableField<ConnectionsRecord, UUID> PLAYERUUID = createField(DSL.name("playername"),
+			org.jooq.impl.SQLDataType.CHAR(36).asConvertedDataType(new StringToUUIDConverter()), this, "");
 
 	/**
 	 * The column <code>connections.connections</code>.

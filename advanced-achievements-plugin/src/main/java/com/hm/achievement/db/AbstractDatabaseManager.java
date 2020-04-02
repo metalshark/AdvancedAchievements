@@ -174,11 +174,10 @@ public abstract class AbstractDatabaseManager implements Reloadable {
 	 * @return array list with Name parameters
 	 */
 	public List<String> getPlayerAchievementNamesList(UUID uuid) {
-		final String playername = uuid.toString();
 		return ((SQLReadOperation<List<String>>) () -> create
 				.select(ACHIEVEMENTS.ACHIEVEMENT)
 				.from(ACHIEVEMENTS)
-				.where(ACHIEVEMENTS.PLAYERNAME.equal(playername))
+				.where(ACHIEVEMENTS.PLAYERUUID.equal(uuid))
 				.fetch(record -> record.get(ACHIEVEMENTS.ACHIEVEMENT)))
 						.executeOperation("retrieving the names of received achievements");
 	}
@@ -192,13 +191,14 @@ public abstract class AbstractDatabaseManager implements Reloadable {
 	 */
 	public String getPlayerAchievementDate(UUID uuid, String achName) {
 		return ((SQLReadOperation<String>) () -> create
-				.select(ACHIEVEMENTS.DATE)
+				.select(ACHIEVEMENTS.EPOCHMILLI)
 				.from(ACHIEVEMENTS)
 				.where(ACHIEVEMENTS.PLAYERUUID.equal(uuid))
-				.and(achName.contains("'") ? ACHIEVEMENTS.ACHIEVEMENT.equal(achName)
-						: ACHIEVEMENTS.ACHIEVEMENT.equal(achName)
-								.or(ACHIEVEMENTS.ACHIEVEMENT.equal(StringUtils.replace(achName, "'", "''"))))
-				.fetchOne(record -> dateFormat.format(record.get(ACHIEVEMENTS.DATE))))
+				.and(achName.contains("'")
+						? ACHIEVEMENTS.ACHIEVEMENT.equal(achName)
+								.or(ACHIEVEMENTS.ACHIEVEMENT.equal(StringUtils.replace(achName, "'", "''")))
+						: ACHIEVEMENTS.ACHIEVEMENT.equal(achName))
+				.fetchOne(record -> dateFormat.format(new Date(record.get(ACHIEVEMENTS.EPOCHMILLI)))))
 						.executeOperation("retrieving an achievement's reception date");
 	}
 
@@ -239,11 +239,10 @@ public abstract class AbstractDatabaseManager implements Reloadable {
 	 * @return LinkedHashMap with keys corresponding to player UUIDs and values corresponding to their achievement count
 	 */
 	public Map<String, Integer> getTopList(long start) {
-		final LocalDateTime date = new Timestamp(start).toLocalDateTime();
 		return ((SQLReadOperation<Map<String, Integer>>) () -> create
 				.select(ACHIEVEMENTS.PLAYERNAME, count())
 				.from(ACHIEVEMENTS)
-				.where((start == 0L) ? null : ACHIEVEMENTS.DATE.greaterThan(date))
+				.where((start == 0L) ? null : ACHIEVEMENTS.EPOCHMILLI.greaterThan(start))
 				.groupBy(ACHIEVEMENTS.PLAYERNAME)
 				.orderBy(count().desc())
 				.fetchMap(ACHIEVEMENTS.PLAYERNAME, count()))
@@ -270,14 +269,15 @@ public abstract class AbstractDatabaseManager implements Reloadable {
 	 * @param epochMs Moment the achievement was registered at.
 	 */
 	void registerAchievement(UUID uuid, String achName, String achMessage, long epochMs) {
-		final LocalDateTime date = new Timestamp(epochMs).toLocalDateTime();
+		if (uuid == null) return;
+		final String description = achMessage == null ? "" : achMessage;
 		((SQLWriteOperation) () -> create
-				.insertInto(ACHIEVEMENTS, ACHIEVEMENTS.PLAYERNAME, ACHIEVEMENTS.ACHIEVEMENT, ACHIEVEMENTS.DESCRIPTION,
-						ACHIEVEMENTS.DATE)
-				.values(uuid.toString(), achName, achMessage, date)
+				.insertInto(ACHIEVEMENTS, ACHIEVEMENTS.PLAYERUUID, ACHIEVEMENTS.ACHIEVEMENT, ACHIEVEMENTS.DESCRIPTION,
+						ACHIEVEMENTS.EPOCHMILLI)
+				.values(uuid, achName, description, epochMs)
 				.onDuplicateKeyUpdate()
-				.set(ACHIEVEMENTS.DESCRIPTION, achMessage)
-				.set(ACHIEVEMENTS.DATE, date)
+				.set(ACHIEVEMENTS.DESCRIPTION, description)
+				.set(ACHIEVEMENTS.EPOCHMILLI, epochMs)
 				.execute())
 						.executeOperation(pool, logger, "registering an achievement");
 	}
@@ -290,11 +290,10 @@ public abstract class AbstractDatabaseManager implements Reloadable {
 	 * @return true if achievement found in database, false otherwise
 	 */
 	public boolean hasPlayerAchievement(UUID uuid, String achName) {
-		final String playername = uuid.toString();
 		return ((SQLReadOperation<Boolean>) () -> create
 				.select(ACHIEVEMENTS.ACHIEVEMENT)
 				.from(ACHIEVEMENTS)
-				.where(ACHIEVEMENTS.PLAYERNAME.eq(playername))
+				.where(ACHIEVEMENTS.PLAYERUUID.eq(uuid))
 				.and((achName.contains("'"))
 						? ACHIEVEMENTS.ACHIEVEMENT.eq(achName)
 								.or(ACHIEVEMENTS.ACHIEVEMENT.eq(StringUtils.replace(achName, "'", "''")))
@@ -438,14 +437,17 @@ public abstract class AbstractDatabaseManager implements Reloadable {
 	 * @param achName
 	 */
 	public void deletePlayerAchievement(UUID uuid, String achName) {
+		if (uuid == null) return;
+		if (achName == null) return;
 		((SQLWriteOperation) () -> create
-			.delete(ACHIEVEMENTS)
-			.where(ACHIEVEMENTS.PLAYERNAME.eq(uuid.toString()))
-			.and((achName.contains("'")) ?
-				ACHIEVEMENTS.ACHIEVEMENT.eq(achName).or(ACHIEVEMENTS.ACHIEVEMENT.eq(StringUtils.replace(achName, "'", "''"))) :
-				ACHIEVEMENTS.ACHIEVEMENT.eq(achName))
-			.execute())
-					.executeOperation(pool, logger, "deleting an achievement");
+				.delete(ACHIEVEMENTS)
+				.where(ACHIEVEMENTS.PLAYERUUID.eq(uuid))
+				.and((achName.contains("'"))
+						? ACHIEVEMENTS.ACHIEVEMENT.eq(achName)
+								.or(ACHIEVEMENTS.ACHIEVEMENT.eq(StringUtils.replace(achName, "'", "''")))
+						: ACHIEVEMENTS.ACHIEVEMENT.eq(achName))
+				.execute())
+						.executeOperation(pool, logger, "deleting an achievement");
 	}
 
 	/**
@@ -454,11 +456,12 @@ public abstract class AbstractDatabaseManager implements Reloadable {
 	 * @param uuid
 	 */
 	public void clearConnection(UUID uuid) {
+		if (uuid == null) return;
 		((SQLWriteOperation) () -> create
-			.delete(CONNECTIONS)
-			.where(CONNECTIONS.PLAYERNAME.eq(uuid.toString()))
-			.execute())
-					.executeOperation(pool, logger, "clearing connection statistics");
+				.delete(CONNECTIONS)
+				.where(CONNECTIONS.PLAYERUUID.eq(uuid))
+				.execute())
+						.executeOperation(pool, logger, "clearing connection statistics");
 	}
 
 	String getPrefix() {
@@ -472,22 +475,23 @@ public abstract class AbstractDatabaseManager implements Reloadable {
 	 * @return ArrayList containing all information about achievements awarded to a player.
 	 */
 	public List<AwardedDBAchievement> getPlayerAchievementsList(UUID uuid) {
+		if (uuid == null) return null;
 		return ((SQLReadOperation<List<AwardedDBAchievement>>) () -> create
-			.select(ACHIEVEMENTS.PLAYERNAME, ACHIEVEMENTS.ACHIEVEMENT, ACHIEVEMENTS.DESCRIPTION, ACHIEVEMENTS.DATE)
-			.from(ACHIEVEMENTS)
-			.where(ACHIEVEMENTS.PLAYERNAME.eq(uuid.toString()))
-			.orderBy((configBookChronologicalOrder) ? ACHIEVEMENTS.DATE : ACHIEVEMENTS.DATE.desc())
-			.fetch((record) -> {
-				String achName = record.get(ACHIEVEMENTS.ACHIEVEMENT);
-				achName = StringUtils.replace(achName, "''", "'");
-				final String displayName = namesToDisplayNames.get(achName);
-				if (StringUtils.isNotBlank(displayName)) {
-					achName = displayName;
-				}
-				final Timestamp dateAwarded = Timestamp.valueOf(record.get(ACHIEVEMENTS.DATE));
-				return new AwardedDBAchievement(uuid, achName, record.get(ACHIEVEMENTS.DESCRIPTION), dateAwarded.getTime(), dateFormat.format(dateAwarded));
-			}))
-			.executeOperation("retrieving the full data of received achievements");
+				.select(ACHIEVEMENTS.PLAYERUUID, ACHIEVEMENTS.ACHIEVEMENT, ACHIEVEMENTS.DESCRIPTION, ACHIEVEMENTS.TIMESTAMP)
+				.from(ACHIEVEMENTS)
+				.where(ACHIEVEMENTS.PLAYERUUID.eq(uuid))
+				.orderBy((configBookChronologicalOrder) ? ACHIEVEMENTS.TIMESTAMP : ACHIEVEMENTS.TIMESTAMP.desc())
+				.fetch((record) -> {
+					String achName = record.get(ACHIEVEMENTS.ACHIEVEMENT);
+					achName = StringUtils.replace(achName, "''", "'");
+					final String displayName = namesToDisplayNames.get(achName);
+					if (StringUtils.isNotBlank(displayName)) {
+						achName = displayName;
+					}
+					return new AwardedDBAchievement(uuid, achName, record.get(ACHIEVEMENTS.DESCRIPTION),
+						record.get(ACHIEVEMENTS.TIMESTAMP).getTime(), dateFormat.format(record.get(ACHIEVEMENTS.TIMESTAMP)));
+				}))
+						.executeOperation("retrieving the full data of received achievements");
 	}
 
 	/**
@@ -499,18 +503,19 @@ public abstract class AbstractDatabaseManager implements Reloadable {
 	 * @return List of AwardedDBAchievement objects, message field is empty to save memory.
 	 */
 	public List<AwardedDBAchievement> getAchievementsRecipientList(String achievementName) {
+		if (achievementName == null) return null;
 		return ((SQLReadOperation<List<AwardedDBAchievement>>) () -> create
-				.select(ACHIEVEMENTS.PLAYERNAME, ACHIEVEMENTS.DATE)
+				.select(ACHIEVEMENTS.PLAYERNAME, ACHIEVEMENTS.TIMESTAMP)
 				.from(ACHIEVEMENTS)
 				.where(ACHIEVEMENTS.ACHIEVEMENT.eq(achievementName))
-				.orderBy(ACHIEVEMENTS.DATE.desc())
+				.orderBy(ACHIEVEMENTS.TIMESTAMP.desc())
 				.limit(1000)
 				.fetch((record) -> {
-					final Date dateAwarded = new Date(Timestamp.valueOf(record.get(ACHIEVEMENTS.DATE)).getTime());
+					final Date dateAwarded = new Date(record.get(ACHIEVEMENTS.TIMESTAMP).getTime());
 					return new AwardedDBAchievement(record.get(ACHIEVEMENTS.PLAYERUUID),
-						namesToDisplayNames.get(achievementName), "", dateAwarded.getTime(),
-						dateFormat.format(dateAwarded));
+							namesToDisplayNames.get(achievementName), "", dateAwarded.getTime(),
+							dateFormat.format(dateAwarded));
 				}))
-								.executeOperation("retrieving the recipients of an achievement");
+						.executeOperation("retrieving the recipients of an achievement");
 	}
 }

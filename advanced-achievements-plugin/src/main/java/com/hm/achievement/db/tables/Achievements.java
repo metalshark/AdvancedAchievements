@@ -3,10 +3,10 @@
  */
 package com.hm.achievement.db.tables;
 
-import com.hm.achievement.db.DefaultSchema;
-import com.hm.achievement.db.Keys;
+import com.hm.achievement.db.*;
 import com.hm.achievement.db.tables.records.AchievementsRecord;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -51,13 +51,13 @@ public class Achievements extends TableImpl<AchievementsRecord> {
 	 * The column <code>achievements.playername</code>.
 	 */
 	public final TableField<AchievementsRecord, String> PLAYERNAME = createField(DSL.name("playername"),
-		org.jooq.impl.SQLDataType.CHAR(36), this, "");
+			org.jooq.impl.SQLDataType.CHAR(36), this, "");
 
 	/**
 	 * The convenience column <code>achievements.playername</code>.
 	 */
 	public final TableField<AchievementsRecord, UUID> PLAYERUUID = createField(DSL.name("playername"),
-		SQLDataType.CHAR(36).asConvertedDataType(new StringToUUIDConverter()), this, "");
+			SQLDataType.CHAR(36).asConvertedDataType(new StringToUUIDConverter()), this, "");
 
 	/**
 	 * The column <code>achievements.achievement</code>.
@@ -76,6 +76,18 @@ public class Achievements extends TableImpl<AchievementsRecord> {
 	 */
 	public final TableField<AchievementsRecord, LocalDateTime> DATE = createField(DSL.name("date"),
 			org.jooq.impl.SQLDataType.LOCALDATETIME, this, "");
+
+	/**
+	 * The convenience column <code>achievements.timestamp</code>.
+	 */
+	public final TableField<AchievementsRecord, Long> EPOCHMILLI = createField(DSL.name("date"),
+		org.jooq.impl.SQLDataType.LOCALDATETIME.asConvertedDataType(new LocalDateTimeToEpochMilliConverter()), this, "");
+
+	/**
+	 * The convenience column <code>achievements.timestamp</code>.
+	 */
+	public final TableField<AchievementsRecord, Timestamp> TIMESTAMP = createField(DSL.name("date"),
+		org.jooq.impl.SQLDataType.LOCALDATETIME.asConvertedDataType(new LocalDateTimeToTimestampConverter()), this, "");
 
 	/**
 	 * Create a <code>achievements</code> table reference
