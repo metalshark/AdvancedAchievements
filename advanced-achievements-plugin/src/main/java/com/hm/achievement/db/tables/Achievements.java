@@ -32,7 +32,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Achievements extends TableImpl<AchievementsRecord> {
 
-	private static final long serialVersionUID = 59510576;
+	private static final long serialVersionUID = 1;
 
 	/**
 	 * The reference instance of <code>achievements</code>
@@ -81,13 +81,13 @@ public class Achievements extends TableImpl<AchievementsRecord> {
 	 * The convenience column <code>achievements.timestamp</code>.
 	 */
 	public final TableField<AchievementsRecord, Long> EPOCHMILLI = createField(DSL.name("date"),
-		org.jooq.impl.SQLDataType.LOCALDATETIME.asConvertedDataType(new LocalDateTimeToEpochMilliConverter()), this, "");
+			org.jooq.impl.SQLDataType.LOCALDATETIME.asConvertedDataType(new LocalDateTimeToEpochMilliConverter()), this, "");
 
 	/**
 	 * The convenience column <code>achievements.timestamp</code>.
 	 */
 	public final TableField<AchievementsRecord, Timestamp> TIMESTAMP = createField(DSL.name("date"),
-		org.jooq.impl.SQLDataType.LOCALDATETIME.asConvertedDataType(new LocalDateTimeToTimestampConverter()), this, "");
+			org.jooq.impl.SQLDataType.LOCALDATETIME.asConvertedDataType(new LocalDateTimeToTimestampConverter()), this, "");
 
 	/**
 	 * Create a <code>achievements</code> table reference

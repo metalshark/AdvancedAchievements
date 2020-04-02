@@ -4,53 +4,8 @@
 package com.hm.achievement.db;
 
 import com.hm.achievement.db.tables.Achievements;
-import com.hm.achievement.db.tables.Anvils;
-import com.hm.achievement.db.tables.Arrows;
-import com.hm.achievement.db.tables.Beds;
-import com.hm.achievement.db.tables.Breaks;
-import com.hm.achievement.db.tables.Breeding;
-import com.hm.achievement.db.tables.Brewing;
 import com.hm.achievement.db.tables.Connections;
-import com.hm.achievement.db.tables.Consumedpotions;
-import com.hm.achievement.db.tables.Crafts;
-import com.hm.achievement.db.tables.Custom;
-import com.hm.achievement.db.tables.Deaths;
-import com.hm.achievement.db.tables.Distanceboat;
-import com.hm.achievement.db.tables.Distancefoot;
-import com.hm.achievement.db.tables.Distancegliding;
-import com.hm.achievement.db.tables.Distancehorse;
-import com.hm.achievement.db.tables.Distancellama;
-import com.hm.achievement.db.tables.Distanceminecart;
-import com.hm.achievement.db.tables.Distancepig;
-import com.hm.achievement.db.tables.Drops;
-import com.hm.achievement.db.tables.Eatenitems;
-import com.hm.achievement.db.tables.Eggs;
-import com.hm.achievement.db.tables.Enchantments;
-import com.hm.achievement.db.tables.Enderpearls;
-import com.hm.achievement.db.tables.Fertilising;
-import com.hm.achievement.db.tables.Fireworks;
-import com.hm.achievement.db.tables.Fish;
-import com.hm.achievement.db.tables.Hoeplowing;
-import com.hm.achievement.db.tables.Itembreaks;
-import com.hm.achievement.db.tables.Kills;
-import com.hm.achievement.db.tables.Lavabuckets;
-import com.hm.achievement.db.tables.Levels;
-import com.hm.achievement.db.tables.Milks;
-import com.hm.achievement.db.tables.Musicdiscs;
-import com.hm.achievement.db.tables.Petmastergive;
-import com.hm.achievement.db.tables.Petmasterreceive;
-import com.hm.achievement.db.tables.Pickups;
-import com.hm.achievement.db.tables.Places;
-import com.hm.achievement.db.tables.Playedtime;
-import com.hm.achievement.db.tables.Playercommands;
-import com.hm.achievement.db.tables.Shears;
-import com.hm.achievement.db.tables.Smelting;
-import com.hm.achievement.db.tables.Snowballs;
-import com.hm.achievement.db.tables.Tames;
-import com.hm.achievement.db.tables.Targetsshot;
-import com.hm.achievement.db.tables.Trades;
-import com.hm.achievement.db.tables.Treasures;
-import com.hm.achievement.db.tables.Waterbuckets;
+import com.hm.achievement.db.tables.NormalAchievement;
 
 import java.util.Arrays;
 import java.util.List;
@@ -65,7 +20,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class DefaultSchema extends SchemaImpl {
 
-	private static final long serialVersionUID = -1288806697;
+	private static final long serialVersionUID = 1;
 
 	/**
 	 * The reference instance of <code>DEFAULT_SCHEMA</code>
@@ -78,239 +33,14 @@ public class DefaultSchema extends SchemaImpl {
 	public final Achievements ACHIEVEMENTS = Achievements.ACHIEVEMENTS;
 
 	/**
-	 * The table <code>anvils</code>.
-	 */
-	public final Anvils ANVILS = Anvils.ANVILS;
-
-	/**
-	 * The table <code>arrows</code>.
-	 */
-	public final Arrows ARROWS = Arrows.ARROWS;
-
-	/**
-	 * The table <code>beds</code>.
-	 */
-	public final Beds BEDS = Beds.BEDS;
-
-	/**
-	 * The table <code>breaks</code>.
-	 */
-	public final Breaks BREAKS = Breaks.BREAKS;
-
-	/**
-	 * The table <code>breeding</code>.
-	 */
-	public final Breeding BREEDING = Breeding.BREEDING;
-
-	/**
-	 * The table <code>brewing</code>.
-	 */
-	public final Brewing BREWING = Brewing.BREWING;
-
-	/**
 	 * The table <code>connections</code>.
 	 */
 	public final Connections CONNECTIONS = Connections.CONNECTIONS;
 
 	/**
-	 * The table <code>consumedpotions</code>.
+	 * The table <code>connections</code>.
 	 */
-	public final Consumedpotions CONSUMEDPOTIONS = Consumedpotions.CONSUMEDPOTIONS;
-
-	/**
-	 * The table <code>crafts</code>.
-	 */
-	public final Crafts CRAFTS = Crafts.CRAFTS;
-
-	/**
-	 * The table <code>custom</code>.
-	 */
-	public final Custom CUSTOM = Custom.CUSTOM;
-
-	/**
-	 * The table <code>deaths</code>.
-	 */
-	public final Deaths DEATHS = Deaths.DEATHS;
-
-	/**
-	 * The table <code>distanceboat</code>.
-	 */
-	public final Distanceboat DISTANCEBOAT = Distanceboat.DISTANCEBOAT;
-
-	/**
-	 * The table <code>distancefoot</code>.
-	 */
-	public final Distancefoot DISTANCEFOOT = Distancefoot.DISTANCEFOOT;
-
-	/**
-	 * The table <code>distancegliding</code>.
-	 */
-	public final Distancegliding DISTANCEGLIDING = Distancegliding.DISTANCEGLIDING;
-
-	/**
-	 * The table <code>distancehorse</code>.
-	 */
-	public final Distancehorse DISTANCEHORSE = Distancehorse.DISTANCEHORSE;
-
-	/**
-	 * The table <code>distancellama</code>.
-	 */
-	public final Distancellama DISTANCELLAMA = Distancellama.DISTANCELLAMA;
-
-	/**
-	 * The table <code>distanceminecart</code>.
-	 */
-	public final Distanceminecart DISTANCEMINECART = Distanceminecart.DISTANCEMINECART;
-
-	/**
-	 * The table <code>distancepig</code>.
-	 */
-	public final Distancepig DISTANCEPIG = Distancepig.DISTANCEPIG;
-
-	/**
-	 * The table <code>drops</code>.
-	 */
-	public final Drops DROPS = Drops.DROPS;
-
-	/**
-	 * The table <code>eatenitems</code>.
-	 */
-	public final Eatenitems EATENITEMS = Eatenitems.EATENITEMS;
-
-	/**
-	 * The table <code>eggs</code>.
-	 */
-	public final Eggs EGGS = Eggs.EGGS;
-
-	/**
-	 * The table <code>enchantments</code>.
-	 */
-	public final Enchantments ENCHANTMENTS = Enchantments.ENCHANTMENTS;
-
-	/**
-	 * The table <code>enderpearls</code>.
-	 */
-	public final Enderpearls ENDERPEARLS = Enderpearls.ENDERPEARLS;
-
-	/**
-	 * The table <code>fertilising</code>.
-	 */
-	public final Fertilising FERTILISING = Fertilising.FERTILISING;
-
-	/**
-	 * The table <code>fireworks</code>.
-	 */
-	public final Fireworks FIREWORKS = Fireworks.FIREWORKS;
-
-	/**
-	 * The table <code>fish</code>.
-	 */
-	public final Fish FISH = Fish.FISH;
-
-	/**
-	 * The table <code>hoeplowing</code>.
-	 */
-	public final Hoeplowing HOEPLOWING = Hoeplowing.HOEPLOWING;
-
-	/**
-	 * The table <code>itembreaks</code>.
-	 */
-	public final Itembreaks ITEMBREAKS = Itembreaks.ITEMBREAKS;
-
-	/**
-	 * The table <code>kills</code>.
-	 */
-	public final Kills KILLS = Kills.KILLS;
-
-	/**
-	 * The table <code>lavabuckets</code>.
-	 */
-	public final Lavabuckets LAVABUCKETS = Lavabuckets.LAVABUCKETS;
-
-	/**
-	 * The table <code>levels</code>.
-	 */
-	public final Levels LEVELS = Levels.LEVELS;
-
-	/**
-	 * The table <code>milks</code>.
-	 */
-	public final Milks MILKS = Milks.MILKS;
-
-	/**
-	 * The table <code>musicdiscs</code>.
-	 */
-	public final Musicdiscs MUSICDISCS = Musicdiscs.MUSICDISCS;
-
-	/**
-	 * The table <code>petmastergive</code>.
-	 */
-	public final Petmastergive PETMASTERGIVE = Petmastergive.PETMASTERGIVE;
-
-	/**
-	 * The table <code>petmasterreceive</code>.
-	 */
-	public final Petmasterreceive PETMASTERRECEIVE = Petmasterreceive.PETMASTERRECEIVE;
-
-	/**
-	 * The table <code>pickups</code>.
-	 */
-	public final Pickups PICKUPS = Pickups.PICKUPS;
-
-	/**
-	 * The table <code>places</code>.
-	 */
-	public final Places PLACES = Places.PLACES;
-
-	/**
-	 * The table <code>playedtime</code>.
-	 */
-	public final Playedtime PLAYEDTIME = Playedtime.PLAYEDTIME;
-
-	/**
-	 * The table <code>playercommands</code>.
-	 */
-	public final Playercommands PLAYERCOMMANDS = Playercommands.PLAYERCOMMANDS;
-
-	/**
-	 * The table <code>shears</code>.
-	 */
-	public final Shears SHEARS = Shears.SHEARS;
-
-	/**
-	 * The table <code>smelting</code>.
-	 */
-	public final Smelting SMELTING = Smelting.SMELTING;
-
-	/**
-	 * The table <code>snowballs</code>.
-	 */
-	public final Snowballs SNOWBALLS = Snowballs.SNOWBALLS;
-
-	/**
-	 * The table <code>tames</code>.
-	 */
-	public final Tames TAMES = Tames.TAMES;
-
-	/**
-	 * The table <code>targetsshot</code>.
-	 */
-	public final Targetsshot TARGETSSHOT = Targetsshot.TARGETSSHOT;
-
-	/**
-	 * The table <code>trades</code>.
-	 */
-	public final Trades TRADES = Trades.TRADES;
-
-	/**
-	 * The table <code>treasures</code>.
-	 */
-	public final Treasures TREASURES = Treasures.TREASURES;
-
-	/**
-	 * The table <code>waterbuckets</code>.
-	 */
-	public final Waterbuckets WATERBUCKETS = Waterbuckets.WATERBUCKETS;
+	public final NormalAchievement NORMALACHIEVEMENT = NormalAchievement.NORMALACHIEVEMENT;
 
 	/**
 	 * No further instances allowed
@@ -328,52 +58,7 @@ public class DefaultSchema extends SchemaImpl {
 	public final List<Table<?>> getTables() {
 		return Arrays.<Table<?>> asList(
 				Achievements.ACHIEVEMENTS,
-				Anvils.ANVILS,
-				Arrows.ARROWS,
-				Beds.BEDS,
-				Breaks.BREAKS,
-				Breeding.BREEDING,
-				Brewing.BREWING,
 				Connections.CONNECTIONS,
-				Consumedpotions.CONSUMEDPOTIONS,
-				Crafts.CRAFTS,
-				Custom.CUSTOM,
-				Deaths.DEATHS,
-				Distanceboat.DISTANCEBOAT,
-				Distancefoot.DISTANCEFOOT,
-				Distancegliding.DISTANCEGLIDING,
-				Distancehorse.DISTANCEHORSE,
-				Distancellama.DISTANCELLAMA,
-				Distanceminecart.DISTANCEMINECART,
-				Distancepig.DISTANCEPIG,
-				Drops.DROPS,
-				Eatenitems.EATENITEMS,
-				Eggs.EGGS,
-				Enchantments.ENCHANTMENTS,
-				Enderpearls.ENDERPEARLS,
-				Fertilising.FERTILISING,
-				Fireworks.FIREWORKS,
-				Fish.FISH,
-				Hoeplowing.HOEPLOWING,
-				Itembreaks.ITEMBREAKS,
-				Kills.KILLS,
-				Lavabuckets.LAVABUCKETS,
-				Levels.LEVELS,
-				Milks.MILKS,
-				Musicdiscs.MUSICDISCS,
-				Petmastergive.PETMASTERGIVE,
-				Petmasterreceive.PETMASTERRECEIVE,
-				Pickups.PICKUPS,
-				Places.PLACES,
-				Playedtime.PLAYEDTIME,
-				Playercommands.PLAYERCOMMANDS,
-				Shears.SHEARS,
-				Smelting.SMELTING,
-				Snowballs.SNOWBALLS,
-				Tames.TAMES,
-				Targetsshot.TARGETSSHOT,
-				Trades.TRADES,
-				Treasures.TREASURES,
-				Waterbuckets.WATERBUCKETS);
+				NormalAchievement.NORMALACHIEVEMENT);
 	}
 }

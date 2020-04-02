@@ -6,15 +6,18 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class LocalDateTimeToEpochMilliConverter implements Converter<LocalDateTime, Long> {
+
 	@Override
 	public Long from(LocalDateTime databaseObject) {
-		if (databaseObject == null) return null;
+		if (databaseObject == null)
+			return null;
 		return Timestamp.valueOf(databaseObject).getTime();
 	}
 
 	@Override
 	public LocalDateTime to(Long userObject) {
-		if (userObject == null) return null;
+		if (userObject == null)
+			return null;
 		return new Timestamp(userObject).toLocalDateTime();
 	}
 

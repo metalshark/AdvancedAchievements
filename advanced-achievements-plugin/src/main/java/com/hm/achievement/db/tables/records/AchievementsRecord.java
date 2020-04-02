@@ -20,7 +20,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 public class AchievementsRecord extends UpdatableRecordImpl<AchievementsRecord>
 		implements Record4<String, String, String, LocalDateTime> {
 
-	private static final long serialVersionUID = 703129472;
+	private static final long serialVersionUID = 1;
 
 	/**
 	 * Setter for <code>achievements.playername</code>.

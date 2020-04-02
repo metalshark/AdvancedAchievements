@@ -4,102 +4,12 @@
 package com.hm.achievement.db;
 
 import com.hm.achievement.db.tables.Achievements;
-import com.hm.achievement.db.tables.Anvils;
-import com.hm.achievement.db.tables.Arrows;
-import com.hm.achievement.db.tables.Beds;
-import com.hm.achievement.db.tables.Breaks;
-import com.hm.achievement.db.tables.Breeding;
-import com.hm.achievement.db.tables.Brewing;
 import com.hm.achievement.db.tables.Connections;
-import com.hm.achievement.db.tables.Consumedpotions;
-import com.hm.achievement.db.tables.Crafts;
-import com.hm.achievement.db.tables.Custom;
-import com.hm.achievement.db.tables.Deaths;
-import com.hm.achievement.db.tables.Distanceboat;
-import com.hm.achievement.db.tables.Distancefoot;
-import com.hm.achievement.db.tables.Distancegliding;
-import com.hm.achievement.db.tables.Distancehorse;
-import com.hm.achievement.db.tables.Distancellama;
-import com.hm.achievement.db.tables.Distanceminecart;
-import com.hm.achievement.db.tables.Distancepig;
-import com.hm.achievement.db.tables.Drops;
-import com.hm.achievement.db.tables.Eatenitems;
-import com.hm.achievement.db.tables.Eggs;
-import com.hm.achievement.db.tables.Enchantments;
-import com.hm.achievement.db.tables.Enderpearls;
-import com.hm.achievement.db.tables.Fertilising;
-import com.hm.achievement.db.tables.Fireworks;
-import com.hm.achievement.db.tables.Fish;
-import com.hm.achievement.db.tables.Hoeplowing;
-import com.hm.achievement.db.tables.Itembreaks;
-import com.hm.achievement.db.tables.Kills;
-import com.hm.achievement.db.tables.Lavabuckets;
-import com.hm.achievement.db.tables.Levels;
-import com.hm.achievement.db.tables.Milks;
-import com.hm.achievement.db.tables.Musicdiscs;
-import com.hm.achievement.db.tables.Petmastergive;
-import com.hm.achievement.db.tables.Petmasterreceive;
-import com.hm.achievement.db.tables.Pickups;
-import com.hm.achievement.db.tables.Places;
-import com.hm.achievement.db.tables.Playedtime;
-import com.hm.achievement.db.tables.Playercommands;
-import com.hm.achievement.db.tables.Shears;
-import com.hm.achievement.db.tables.Smelting;
-import com.hm.achievement.db.tables.Snowballs;
-import com.hm.achievement.db.tables.Tames;
-import com.hm.achievement.db.tables.Targetsshot;
-import com.hm.achievement.db.tables.Trades;
-import com.hm.achievement.db.tables.Treasures;
-import com.hm.achievement.db.tables.Waterbuckets;
-import com.hm.achievement.db.tables.records.AchievementsRecord;
-import com.hm.achievement.db.tables.records.AnvilsRecord;
-import com.hm.achievement.db.tables.records.ArrowsRecord;
-import com.hm.achievement.db.tables.records.BedsRecord;
-import com.hm.achievement.db.tables.records.BreaksRecord;
-import com.hm.achievement.db.tables.records.BreedingRecord;
-import com.hm.achievement.db.tables.records.BrewingRecord;
-import com.hm.achievement.db.tables.records.ConnectionsRecord;
-import com.hm.achievement.db.tables.records.ConsumedpotionsRecord;
-import com.hm.achievement.db.tables.records.CraftsRecord;
-import com.hm.achievement.db.tables.records.CustomRecord;
-import com.hm.achievement.db.tables.records.DeathsRecord;
-import com.hm.achievement.db.tables.records.DistanceboatRecord;
-import com.hm.achievement.db.tables.records.DistancefootRecord;
-import com.hm.achievement.db.tables.records.DistanceglidingRecord;
-import com.hm.achievement.db.tables.records.DistancehorseRecord;
-import com.hm.achievement.db.tables.records.DistancellamaRecord;
-import com.hm.achievement.db.tables.records.DistanceminecartRecord;
-import com.hm.achievement.db.tables.records.DistancepigRecord;
-import com.hm.achievement.db.tables.records.DropsRecord;
-import com.hm.achievement.db.tables.records.EatenitemsRecord;
-import com.hm.achievement.db.tables.records.EggsRecord;
-import com.hm.achievement.db.tables.records.EnchantmentsRecord;
-import com.hm.achievement.db.tables.records.EnderpearlsRecord;
-import com.hm.achievement.db.tables.records.FertilisingRecord;
-import com.hm.achievement.db.tables.records.FireworksRecord;
-import com.hm.achievement.db.tables.records.FishRecord;
-import com.hm.achievement.db.tables.records.HoeplowingRecord;
-import com.hm.achievement.db.tables.records.ItembreaksRecord;
-import com.hm.achievement.db.tables.records.KillsRecord;
-import com.hm.achievement.db.tables.records.LavabucketsRecord;
-import com.hm.achievement.db.tables.records.LevelsRecord;
-import com.hm.achievement.db.tables.records.MilksRecord;
-import com.hm.achievement.db.tables.records.MusicdiscsRecord;
-import com.hm.achievement.db.tables.records.PetmastergiveRecord;
-import com.hm.achievement.db.tables.records.PetmasterreceiveRecord;
-import com.hm.achievement.db.tables.records.PickupsRecord;
-import com.hm.achievement.db.tables.records.PlacesRecord;
-import com.hm.achievement.db.tables.records.PlayedtimeRecord;
-import com.hm.achievement.db.tables.records.PlayercommandsRecord;
-import com.hm.achievement.db.tables.records.ShearsRecord;
-import com.hm.achievement.db.tables.records.SmeltingRecord;
-import com.hm.achievement.db.tables.records.SnowballsRecord;
-import com.hm.achievement.db.tables.records.TamesRecord;
-import com.hm.achievement.db.tables.records.TargetsshotRecord;
-import com.hm.achievement.db.tables.records.TradesRecord;
-import com.hm.achievement.db.tables.records.TreasuresRecord;
-import com.hm.achievement.db.tables.records.WaterbucketsRecord;
+import com.hm.achievement.db.tables.NormalAchievement;
 
+import com.hm.achievement.db.tables.records.AchievementsRecord;
+import com.hm.achievement.db.tables.records.ConnectionsRecord;
+import com.hm.achievement.db.tables.records.NormalAchievementRecord;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.Internal;
@@ -119,53 +29,8 @@ public class Keys {
 	// -------------------------------------------------------------------------
 
 	public static final UniqueKey<AchievementsRecord> PK_ACHIEVEMENTS = UniqueKeys0.PK_ACHIEVEMENTS;
-	public static final UniqueKey<AnvilsRecord> PK_ANVILS = UniqueKeys0.PK_ANVILS;
-	public static final UniqueKey<ArrowsRecord> PK_ARROWS = UniqueKeys0.PK_ARROWS;
-	public static final UniqueKey<BedsRecord> PK_BEDS = UniqueKeys0.PK_BEDS;
-	public static final UniqueKey<BreaksRecord> PK_BREAKS = UniqueKeys0.PK_BREAKS;
-	public static final UniqueKey<BreedingRecord> PK_BREEDING = UniqueKeys0.PK_BREEDING;
-	public static final UniqueKey<BrewingRecord> PK_BREWING = UniqueKeys0.PK_BREWING;
 	public static final UniqueKey<ConnectionsRecord> PK_CONNECTIONS = UniqueKeys0.PK_CONNECTIONS;
-	public static final UniqueKey<ConsumedpotionsRecord> PK_CONSUMEDPOTIONS = UniqueKeys0.PK_CONSUMEDPOTIONS;
-	public static final UniqueKey<CraftsRecord> PK_CRAFTS = UniqueKeys0.PK_CRAFTS;
-	public static final UniqueKey<CustomRecord> PK_CUSTOM = UniqueKeys0.PK_CUSTOM;
-	public static final UniqueKey<DeathsRecord> PK_DEATHS = UniqueKeys0.PK_DEATHS;
-	public static final UniqueKey<DistanceboatRecord> PK_DISTANCEBOAT = UniqueKeys0.PK_DISTANCEBOAT;
-	public static final UniqueKey<DistancefootRecord> PK_DISTANCEFOOT = UniqueKeys0.PK_DISTANCEFOOT;
-	public static final UniqueKey<DistanceglidingRecord> PK_DISTANCEGLIDING = UniqueKeys0.PK_DISTANCEGLIDING;
-	public static final UniqueKey<DistancehorseRecord> PK_DISTANCEHORSE = UniqueKeys0.PK_DISTANCEHORSE;
-	public static final UniqueKey<DistancellamaRecord> PK_DISTANCELLAMA = UniqueKeys0.PK_DISTANCELLAMA;
-	public static final UniqueKey<DistanceminecartRecord> PK_DISTANCEMINECART = UniqueKeys0.PK_DISTANCEMINECART;
-	public static final UniqueKey<DistancepigRecord> PK_DISTANCEPIG = UniqueKeys0.PK_DISTANCEPIG;
-	public static final UniqueKey<DropsRecord> PK_DROPS = UniqueKeys0.PK_DROPS;
-	public static final UniqueKey<EatenitemsRecord> PK_EATENITEMS = UniqueKeys0.PK_EATENITEMS;
-	public static final UniqueKey<EggsRecord> PK_EGGS = UniqueKeys0.PK_EGGS;
-	public static final UniqueKey<EnchantmentsRecord> PK_ENCHANTMENTS = UniqueKeys0.PK_ENCHANTMENTS;
-	public static final UniqueKey<EnderpearlsRecord> PK_ENDERPEARLS = UniqueKeys0.PK_ENDERPEARLS;
-	public static final UniqueKey<FertilisingRecord> PK_FERTILISING = UniqueKeys0.PK_FERTILISING;
-	public static final UniqueKey<FireworksRecord> PK_FIREWORKS = UniqueKeys0.PK_FIREWORKS;
-	public static final UniqueKey<FishRecord> PK_FISH = UniqueKeys0.PK_FISH;
-	public static final UniqueKey<HoeplowingRecord> PK_HOEPLOWING = UniqueKeys0.PK_HOEPLOWING;
-	public static final UniqueKey<ItembreaksRecord> PK_ITEMBREAKS = UniqueKeys0.PK_ITEMBREAKS;
-	public static final UniqueKey<KillsRecord> PK_KILLS = UniqueKeys0.PK_KILLS;
-	public static final UniqueKey<LavabucketsRecord> PK_LAVABUCKETS = UniqueKeys0.PK_LAVABUCKETS;
-	public static final UniqueKey<LevelsRecord> PK_LEVELS = UniqueKeys0.PK_LEVELS;
-	public static final UniqueKey<MilksRecord> PK_MILKS = UniqueKeys0.PK_MILKS;
-	public static final UniqueKey<MusicdiscsRecord> PK_MUSICDISCS = UniqueKeys0.PK_MUSICDISCS;
-	public static final UniqueKey<PetmastergiveRecord> PK_PETMASTERGIVE = UniqueKeys0.PK_PETMASTERGIVE;
-	public static final UniqueKey<PetmasterreceiveRecord> PK_PETMASTERRECEIVE = UniqueKeys0.PK_PETMASTERRECEIVE;
-	public static final UniqueKey<PickupsRecord> PK_PICKUPS = UniqueKeys0.PK_PICKUPS;
-	public static final UniqueKey<PlacesRecord> PK_PLACES = UniqueKeys0.PK_PLACES;
-	public static final UniqueKey<PlayedtimeRecord> PK_PLAYEDTIME = UniqueKeys0.PK_PLAYEDTIME;
-	public static final UniqueKey<PlayercommandsRecord> PK_PLAYERCOMMANDS = UniqueKeys0.PK_PLAYERCOMMANDS;
-	public static final UniqueKey<ShearsRecord> PK_SHEARS = UniqueKeys0.PK_SHEARS;
-	public static final UniqueKey<SmeltingRecord> PK_SMELTING = UniqueKeys0.PK_SMELTING;
-	public static final UniqueKey<SnowballsRecord> PK_SNOWBALLS = UniqueKeys0.PK_SNOWBALLS;
-	public static final UniqueKey<TamesRecord> PK_TAMES = UniqueKeys0.PK_TAMES;
-	public static final UniqueKey<TargetsshotRecord> PK_TARGETSSHOT = UniqueKeys0.PK_TARGETSSHOT;
-	public static final UniqueKey<TradesRecord> PK_TRADES = UniqueKeys0.PK_TRADES;
-	public static final UniqueKey<TreasuresRecord> PK_TREASURES = UniqueKeys0.PK_TREASURES;
-	public static final UniqueKey<WaterbucketsRecord> PK_WATERBUCKETS = UniqueKeys0.PK_WATERBUCKETS;
+	public static final UniqueKey<NormalAchievementRecord> PK_NORMALACHIEVEMENT = UniqueKeys0.PK_NORMALACHIEVEMENT;
 
 	// -------------------------------------------------------------------------
 	// FOREIGN KEY definitions
@@ -180,112 +45,10 @@ public class Keys {
 		public static final UniqueKey<AchievementsRecord> PK_ACHIEVEMENTS = Internal.createUniqueKey(
 				Achievements.ACHIEVEMENTS, "pk_achievements",
 				new TableField[] { Achievements.ACHIEVEMENTS.PLAYERNAME, Achievements.ACHIEVEMENTS.ACHIEVEMENT }, true);
-		public static final UniqueKey<AnvilsRecord> PK_ANVILS = Internal.createUniqueKey(Anvils.ANVILS, "pk_anvils",
-				new TableField[] { Anvils.ANVILS.PLAYERNAME }, true);
-		public static final UniqueKey<ArrowsRecord> PK_ARROWS = Internal.createUniqueKey(Arrows.ARROWS, "pk_arrows",
-				new TableField[] { Arrows.ARROWS.PLAYERNAME }, true);
-		public static final UniqueKey<BedsRecord> PK_BEDS = Internal.createUniqueKey(Beds.BEDS, "pk_beds",
-				new TableField[] { Beds.BEDS.PLAYERNAME }, true);
-		public static final UniqueKey<BreaksRecord> PK_BREAKS = Internal.createUniqueKey(Breaks.BREAKS, "pk_breaks",
-				new TableField[] { Breaks.BREAKS.PLAYERNAME, Breaks.BREAKS.BLOCKID }, true);
-		public static final UniqueKey<BreedingRecord> PK_BREEDING = Internal.createUniqueKey(Breeding.BREEDING,
-				"pk_breeding", new TableField[] { Breeding.BREEDING.PLAYERNAME, Breeding.BREEDING.MOBNAME }, true);
-		public static final UniqueKey<BrewingRecord> PK_BREWING = Internal.createUniqueKey(Brewing.BREWING, "pk_brewing",
-				new TableField[] { Brewing.BREWING.PLAYERNAME }, true);
 		public static final UniqueKey<ConnectionsRecord> PK_CONNECTIONS = Internal.createUniqueKey(Connections.CONNECTIONS,
 				"pk_connections", new TableField[] { Connections.CONNECTIONS.PLAYERNAME }, true);
-		public static final UniqueKey<ConsumedpotionsRecord> PK_CONSUMEDPOTIONS = Internal.createUniqueKey(
-				Consumedpotions.CONSUMEDPOTIONS, "pk_consumedpotions",
-				new TableField[] { Consumedpotions.CONSUMEDPOTIONS.PLAYERNAME }, true);
-		public static final UniqueKey<CraftsRecord> PK_CRAFTS = Internal.createUniqueKey(Crafts.CRAFTS, "pk_crafts",
-				new TableField[] { Crafts.CRAFTS.PLAYERNAME, Crafts.CRAFTS.ITEM }, true);
-		public static final UniqueKey<CustomRecord> PK_CUSTOM = Internal.createUniqueKey(Custom.CUSTOM, "pk_custom",
-				new TableField[] { Custom.CUSTOM.PLAYERNAME, Custom.CUSTOM.CUSTOMNAME }, true);
-		public static final UniqueKey<DeathsRecord> PK_DEATHS = Internal.createUniqueKey(Deaths.DEATHS, "pk_deaths",
-				new TableField[] { Deaths.DEATHS.PLAYERNAME }, true);
-		public static final UniqueKey<DistanceboatRecord> PK_DISTANCEBOAT = Internal.createUniqueKey(
-				Distanceboat.DISTANCEBOAT, "pk_distanceboat", new TableField[] { Distanceboat.DISTANCEBOAT.PLAYERNAME },
-				true);
-		public static final UniqueKey<DistancefootRecord> PK_DISTANCEFOOT = Internal.createUniqueKey(
-				Distancefoot.DISTANCEFOOT, "pk_distancefoot", new TableField[] { Distancefoot.DISTANCEFOOT.PLAYERNAME },
-				true);
-		public static final UniqueKey<DistanceglidingRecord> PK_DISTANCEGLIDING = Internal.createUniqueKey(
-				Distancegliding.DISTANCEGLIDING, "pk_distancegliding",
-				new TableField[] { Distancegliding.DISTANCEGLIDING.PLAYERNAME }, true);
-		public static final UniqueKey<DistancehorseRecord> PK_DISTANCEHORSE = Internal.createUniqueKey(
-				Distancehorse.DISTANCEHORSE, "pk_distancehorse", new TableField[] { Distancehorse.DISTANCEHORSE.PLAYERNAME },
-				true);
-		public static final UniqueKey<DistancellamaRecord> PK_DISTANCELLAMA = Internal.createUniqueKey(
-				Distancellama.DISTANCELLAMA, "pk_distancellama", new TableField[] { Distancellama.DISTANCELLAMA.PLAYERNAME },
-				true);
-		public static final UniqueKey<DistanceminecartRecord> PK_DISTANCEMINECART = Internal.createUniqueKey(
-				Distanceminecart.DISTANCEMINECART, "pk_distanceminecart",
-				new TableField[] { Distanceminecart.DISTANCEMINECART.PLAYERNAME }, true);
-		public static final UniqueKey<DistancepigRecord> PK_DISTANCEPIG = Internal.createUniqueKey(Distancepig.DISTANCEPIG,
-				"pk_distancepig", new TableField[] { Distancepig.DISTANCEPIG.PLAYERNAME }, true);
-		public static final UniqueKey<DropsRecord> PK_DROPS = Internal.createUniqueKey(Drops.DROPS, "pk_drops",
-				new TableField[] { Drops.DROPS.PLAYERNAME }, true);
-		public static final UniqueKey<EatenitemsRecord> PK_EATENITEMS = Internal.createUniqueKey(Eatenitems.EATENITEMS,
-				"pk_eatenitems", new TableField[] { Eatenitems.EATENITEMS.PLAYERNAME }, true);
-		public static final UniqueKey<EggsRecord> PK_EGGS = Internal.createUniqueKey(Eggs.EGGS, "pk_eggs",
-				new TableField[] { Eggs.EGGS.PLAYERNAME }, true);
-		public static final UniqueKey<EnchantmentsRecord> PK_ENCHANTMENTS = Internal.createUniqueKey(
-				Enchantments.ENCHANTMENTS, "pk_enchantments", new TableField[] { Enchantments.ENCHANTMENTS.PLAYERNAME },
-				true);
-		public static final UniqueKey<EnderpearlsRecord> PK_ENDERPEARLS = Internal.createUniqueKey(Enderpearls.ENDERPEARLS,
-				"pk_enderpearls", new TableField[] { Enderpearls.ENDERPEARLS.PLAYERNAME }, true);
-		public static final UniqueKey<FertilisingRecord> PK_FERTILISING = Internal.createUniqueKey(Fertilising.FERTILISING,
-				"pk_fertilising", new TableField[] { Fertilising.FERTILISING.PLAYERNAME }, true);
-		public static final UniqueKey<FireworksRecord> PK_FIREWORKS = Internal.createUniqueKey(Fireworks.FIREWORKS,
-				"pk_fireworks", new TableField[] { Fireworks.FIREWORKS.PLAYERNAME }, true);
-		public static final UniqueKey<FishRecord> PK_FISH = Internal.createUniqueKey(Fish.FISH, "pk_fish",
-				new TableField[] { Fish.FISH.PLAYERNAME }, true);
-		public static final UniqueKey<HoeplowingRecord> PK_HOEPLOWING = Internal.createUniqueKey(Hoeplowing.HOEPLOWING,
-				"pk_hoeplowing", new TableField[] { Hoeplowing.HOEPLOWING.PLAYERNAME }, true);
-		public static final UniqueKey<ItembreaksRecord> PK_ITEMBREAKS = Internal.createUniqueKey(Itembreaks.ITEMBREAKS,
-				"pk_itembreaks", new TableField[] { Itembreaks.ITEMBREAKS.PLAYERNAME }, true);
-		public static final UniqueKey<KillsRecord> PK_KILLS = Internal.createUniqueKey(Kills.KILLS, "pk_kills",
-				new TableField[] { Kills.KILLS.PLAYERNAME, Kills.KILLS.MOBNAME }, true);
-		public static final UniqueKey<LavabucketsRecord> PK_LAVABUCKETS = Internal.createUniqueKey(Lavabuckets.LAVABUCKETS,
-				"pk_lavabuckets", new TableField[] { Lavabuckets.LAVABUCKETS.PLAYERNAME }, true);
-		public static final UniqueKey<LevelsRecord> PK_LEVELS = Internal.createUniqueKey(Levels.LEVELS, "pk_levels",
-				new TableField[] { Levels.LEVELS.PLAYERNAME }, true);
-		public static final UniqueKey<MilksRecord> PK_MILKS = Internal.createUniqueKey(Milks.MILKS, "pk_milks",
-				new TableField[] { Milks.MILKS.PLAYERNAME }, true);
-		public static final UniqueKey<MusicdiscsRecord> PK_MUSICDISCS = Internal.createUniqueKey(Musicdiscs.MUSICDISCS,
-				"pk_musicdiscs", new TableField[] { Musicdiscs.MUSICDISCS.PLAYERNAME }, true);
-		public static final UniqueKey<PetmastergiveRecord> PK_PETMASTERGIVE = Internal.createUniqueKey(
-				Petmastergive.PETMASTERGIVE, "pk_petmastergive", new TableField[] { Petmastergive.PETMASTERGIVE.PLAYERNAME },
-				true);
-		public static final UniqueKey<PetmasterreceiveRecord> PK_PETMASTERRECEIVE = Internal.createUniqueKey(
-				Petmasterreceive.PETMASTERRECEIVE, "pk_petmasterreceive",
-				new TableField[] { Petmasterreceive.PETMASTERRECEIVE.PLAYERNAME }, true);
-		public static final UniqueKey<PickupsRecord> PK_PICKUPS = Internal.createUniqueKey(Pickups.PICKUPS, "pk_pickups",
-				new TableField[] { Pickups.PICKUPS.PLAYERNAME }, true);
-		public static final UniqueKey<PlacesRecord> PK_PLACES = Internal.createUniqueKey(Places.PLACES, "pk_places",
-				new TableField[] { Places.PLACES.PLAYERNAME, Places.PLACES.BLOCKID }, true);
-		public static final UniqueKey<PlayedtimeRecord> PK_PLAYEDTIME = Internal.createUniqueKey(Playedtime.PLAYEDTIME,
-				"pk_playedtime", new TableField[] { Playedtime.PLAYEDTIME.PLAYERNAME }, true);
-		public static final UniqueKey<PlayercommandsRecord> PK_PLAYERCOMMANDS = Internal.createUniqueKey(
-				Playercommands.PLAYERCOMMANDS, "pk_playercommands",
-				new TableField[] { Playercommands.PLAYERCOMMANDS.PLAYERNAME, Playercommands.PLAYERCOMMANDS.COMMAND }, true);
-		public static final UniqueKey<ShearsRecord> PK_SHEARS = Internal.createUniqueKey(Shears.SHEARS, "pk_shears",
-				new TableField[] { Shears.SHEARS.PLAYERNAME }, true);
-		public static final UniqueKey<SmeltingRecord> PK_SMELTING = Internal.createUniqueKey(Smelting.SMELTING,
-				"pk_smelting", new TableField[] { Smelting.SMELTING.PLAYERNAME }, true);
-		public static final UniqueKey<SnowballsRecord> PK_SNOWBALLS = Internal.createUniqueKey(Snowballs.SNOWBALLS,
-				"pk_snowballs", new TableField[] { Snowballs.SNOWBALLS.PLAYERNAME }, true);
-		public static final UniqueKey<TamesRecord> PK_TAMES = Internal.createUniqueKey(Tames.TAMES, "pk_tames",
-				new TableField[] { Tames.TAMES.PLAYERNAME }, true);
-		public static final UniqueKey<TargetsshotRecord> PK_TARGETSSHOT = Internal.createUniqueKey(Targetsshot.TARGETSSHOT,
-				"pk_targetsshot",
-				new TableField[] { Targetsshot.TARGETSSHOT.PLAYERNAME, Targetsshot.TARGETSSHOT.TARGETNAME }, true);
-		public static final UniqueKey<TradesRecord> PK_TRADES = Internal.createUniqueKey(Trades.TRADES, "pk_trades",
-				new TableField[] { Trades.TRADES.PLAYERNAME }, true);
-		public static final UniqueKey<TreasuresRecord> PK_TREASURES = Internal.createUniqueKey(Treasures.TREASURES,
-				"pk_treasures", new TableField[] { Treasures.TREASURES.PLAYERNAME }, true);
-		public static final UniqueKey<WaterbucketsRecord> PK_WATERBUCKETS = Internal.createUniqueKey(
-				Waterbuckets.WATERBUCKETS, "pk_waterbuckets", new TableField[] { Waterbuckets.WATERBUCKETS.PLAYERNAME },
-				true);
+		public static final UniqueKey<NormalAchievementRecord> PK_NORMALACHIEVEMENT = Internal.createUniqueKey(
+				NormalAchievement.NORMALACHIEVEMENT, "pk_normalachievement",
+				new TableField[] { NormalAchievement.NORMALACHIEVEMENT.PLAYERNAME }, true);
 	}
 }

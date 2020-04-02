@@ -9,13 +9,15 @@ public class LocalDateTimeToTimestampConverter implements Converter<LocalDateTim
 
 	@Override
 	public Timestamp from(LocalDateTime databaseObject) {
-		if (databaseObject == null) return null;
+		if (databaseObject == null)
+			return null;
 		return Timestamp.valueOf(databaseObject);
 	}
 
 	@Override
 	public LocalDateTime to(Timestamp userObject) {
-		if (userObject == null) return null;
+		if (userObject == null)
+			return null;
 		return userObject.toLocalDateTime();
 	}
 

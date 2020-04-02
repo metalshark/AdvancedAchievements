@@ -8,13 +8,15 @@ public class StringToUUIDConverter implements Converter<String, UUID> {
 
 	@Override
 	public UUID from(String databaseObject) {
-		if (databaseObject == null) return null;
+		if (databaseObject == null)
+			return null;
 		return UUID.fromString(databaseObject);
 	}
 
 	@Override
 	public String to(UUID userObject) {
-		if (userObject == null) return null;
+		if (userObject == null)
+			return null;
 		return userObject.toString();
 	}
 
