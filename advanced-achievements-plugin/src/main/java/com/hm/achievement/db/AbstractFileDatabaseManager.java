@@ -14,6 +14,7 @@ import com.hm.achievement.exception.PluginLoadError;
 import com.hm.mcshared.file.CommentedYamlConfiguration;
 import com.hm.mcshared.file.FileManager;
 import com.zaxxer.hikari.HikariConfig;
+import org.jooq.SQLDialect;
 
 /**
  * Class used to handle a file-backed database.
@@ -29,8 +30,9 @@ public class AbstractFileDatabaseManager extends AbstractDatabaseManager {
 
 	public AbstractFileDatabaseManager(@Named("main") CommentedYamlConfiguration mainConfig, Logger logger,
 			@Named("ntd") Map<String, String> namesToDisplayNames, DatabaseUpdater databaseUpdater,
-			AdvancedAchievements advancedAchievements, String dataSourceClassName, String jdbcUrl, String filename) {
-		super(mainConfig, logger, namesToDisplayNames, databaseUpdater, dataSourceClassName);
+			AdvancedAchievements advancedAchievements, String dataSourceClassName, SQLDialect sqlDialect, String jdbcUrl,
+			String filename) {
+		super(mainConfig, logger, namesToDisplayNames, databaseUpdater, dataSourceClassName, sqlDialect);
 		this.advancedAchievements = advancedAchievements;
 		this.jdbcUrl = jdbcUrl;
 		this.filename = filename;

@@ -12,6 +12,7 @@ import javax.inject.Named;
 import com.hm.achievement.exception.PluginLoadError;
 import com.hm.mcshared.file.CommentedYamlConfiguration;
 import com.zaxxer.hikari.HikariConfig;
+import org.jooq.SQLDialect;
 
 /**
  * Class used to handle a remote (in the sense not managed by the plugin) database.
@@ -30,9 +31,8 @@ public class AbstractRemoteDatabaseManager extends AbstractDatabaseManager {
 
 	public AbstractRemoteDatabaseManager(@Named("main") CommentedYamlConfiguration mainConfig, Logger logger,
 			@Named("ntd") Map<String, String> namesToDisplayNames, DatabaseUpdater databaseUpdater,
-			String dataSourceClassName,
-			String databaseType) {
-		super(mainConfig, logger, namesToDisplayNames, databaseUpdater, dataSourceClassName);
+			String dataSourceClassName, SQLDialect sqlDialect, String databaseType) {
+		super(mainConfig, logger, namesToDisplayNames, databaseUpdater, dataSourceClassName, sqlDialect);
 		this.databaseType = databaseType;
 	}
 

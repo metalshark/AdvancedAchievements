@@ -8,6 +8,7 @@ import javax.inject.Named;
 
 import com.hm.achievement.AdvancedAchievements;
 import com.hm.mcshared.file.CommentedYamlConfiguration;
+import org.jooq.SQLDialect;
 
 /**
  * Class used to handle a SQLite database.
@@ -21,6 +22,6 @@ public class SQLiteDatabaseManager extends AbstractFileDatabaseManager {
 			@Named("ntd") Map<String, String> namesToDisplayNames, DatabaseUpdater databaseUpdater,
 			AdvancedAchievements advancedAchievements) {
 		super(mainConfig, logger, namesToDisplayNames, databaseUpdater, advancedAchievements, "org.sqlite.SQLiteDataSource",
-				"jdbc:sqlite:" + new File(advancedAchievements.getDataFolder(), "achievements.db"), "achievements.db");
+			SQLDialect.SQLITE, "jdbc:sqlite:" + new File(advancedAchievements.getDataFolder(), "achievements.db"), "achievements.db");
 	}
 }

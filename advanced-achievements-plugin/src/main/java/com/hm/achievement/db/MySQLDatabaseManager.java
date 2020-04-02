@@ -8,6 +8,7 @@ import javax.inject.Named;
 
 import com.hm.achievement.exception.PluginLoadError;
 import com.hm.mcshared.file.CommentedYamlConfiguration;
+import org.jooq.SQLDialect;
 
 /**
  * Class used to handle a MySQL database.
@@ -19,7 +20,7 @@ public class MySQLDatabaseManager extends AbstractRemoteDatabaseManager {
 
 	public MySQLDatabaseManager(@Named("main") CommentedYamlConfiguration mainConfig, Logger logger,
 			@Named("ntd") Map<String, String> namesToDisplayNames, DatabaseUpdater databaseUpdater) {
-		super(mainConfig, logger, namesToDisplayNames, databaseUpdater, null, "mysql");
+		super(mainConfig, logger, namesToDisplayNames, databaseUpdater, null, SQLDialect.MYSQL, "mysql");
 	}
 
 	@Override

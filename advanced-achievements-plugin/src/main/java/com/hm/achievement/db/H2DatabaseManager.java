@@ -8,6 +8,7 @@ import javax.inject.Named;
 
 import com.hm.achievement.AdvancedAchievements;
 import com.hm.mcshared.file.CommentedYamlConfiguration;
+import org.jooq.SQLDialect;
 
 /**
  * Class used to handle a H2 database.
@@ -21,7 +22,7 @@ public class H2DatabaseManager extends AbstractFileDatabaseManager {
 			@Named("ntd") Map<String, String> namesToDisplayNames, DatabaseUpdater databaseUpdater,
 			AdvancedAchievements advancedAchievements) {
 		super(mainConfig, logger, namesToDisplayNames, databaseUpdater, advancedAchievements, "org.h2.jdbcx.JdbcDataSource",
-				"jdbc:h2:./" + new File(advancedAchievements.getDataFolder(), "achievements")
+				SQLDialect.H2, "jdbc:h2:./" + new File(advancedAchievements.getDataFolder(), "achievements")
 						+ ";DATABASE_TO_UPPER=false;MODE=MySQL",
 				"achievements.mv.db");
 	}

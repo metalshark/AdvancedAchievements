@@ -9,6 +9,7 @@ import javax.inject.Named;
 
 import com.hm.achievement.category.NormalAchievements;
 import com.hm.mcshared.file.CommentedYamlConfiguration;
+import org.jooq.SQLDialect;
 
 /**
  * Class used to handle a PosgreSQL database. Note that some query methods are overriden as the SQL syntax is different
@@ -22,27 +23,8 @@ public class PostgreSQLDatabaseManager extends AbstractRemoteDatabaseManager {
 	public PostgreSQLDatabaseManager(@Named("main") CommentedYamlConfiguration mainConfig, Logger logger,
 			@Named("ntd") Map<String, String> namesToDisplayNames, DatabaseUpdater databaseUpdater) {
 		super(mainConfig, logger, namesToDisplayNames, databaseUpdater, "org.postgresql.ds.PGSimpleDataSource",
+				SQLDialect.POSTGRES,
 				"postgresql");
-	}
-
-	@Override
-	public void registerAchievement(UUID uuid, String achName, String achMessage) {
-		// PostgreSQL has no REPLACE operator. We have to use the INSERT ... ON CONFLICT construct, which is available
-		// for PostgreSQL 9.5+.
-		String sql = "INSERT INTO " + prefix + "achievements VALUES (?,?,?,?)"
-				+ " ON CONFLICT (playername,achievement) DO UPDATE SET (description,date)=(?,?)";
-		((SQLWriteOperation) () -> {
-			try (final Connection conn = getDataSource().getConnection();
-					final PreparedStatement ps = conn.prepareStatement(sql)) {
-				ps.setObject(1, uuid, Types.CHAR);
-				ps.setString(2, achName);
-				ps.setString(3, achMessage);
-				ps.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
-				ps.setString(5, achMessage);
-				ps.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
-				ps.execute();
-			}
-		}).executeOperation(pool, logger, "registering an achievement");
 	}
 
 	@Override
